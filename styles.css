@@ -1,0 +1,86 @@
+/* styles sheet */
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    height: 100%;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: auto !important;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    flex-grow: 0.1;
+    background-color: aliceblue;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 4em;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: auto 20em auto 20em;
+    background-color: lightgrey;
+    border-radius: 0.8em;
+}
+
+.display {
+    display: flex;
+    margin: 1em;
+    min-height: 8em;
+    background-color: lightgreen;
+    border: 1px solid lightgrey;
+    border-radius: 2em;
+}
+
+.row {
+    display: flex;
+    min-height: 6em;
+}
+
+.buttons {
+    display: flex;
+    flex: 1;
+    border-radius: 2em;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0.5em;
+}
+
+.footer {
+    display: flex;
+    flex: 1;
+    background-color: aliceblue;
+    align-items: center;
+    justify-content: center;
+}
+
+.footerText {
+    font-weight: bold;
+    border: 1px black solid;
+    border-radius: 2em;
+    padding: 0.5em;
+    background-color: rgb(201, 201, 201);
+}
