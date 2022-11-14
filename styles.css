@@ -46,11 +46,19 @@ body {
 
 .display {
     display: flex;
+    flex-direction: column;
     margin: 1em;
-    min-height: 8em;
     background-color: lightgreen;
     border: 1px solid lightgrey;
     border-radius: 2em;
+}
+
+.result {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.1em;
+    padding-right: 0.5em;
+    font-size: 80px;
 }
 
 .row {
