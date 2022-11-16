@@ -1,12 +1,47 @@
 const result = document.querySelector('.result');
+const calcDisplay = document.getElementById('operation');
 
-let displayValue = '';
-let value1 = '';
-let calc = '';
-let value2 = '';
+let storedDisplay = '0';
+let opResult = 0;
+let calc = undefined;
+let clear = undefined;
 
-function operate(value1, calc, value2) {
-    return
+function operate(op1, opn, op2) {
+    op1 = Number(op1);
+    op2 = Number(op2);
+
+    storedDisplay = result.textContent;
+
+    if (opn == 'sum' && opn != undefined) {
+        opResult = op1 + op2;
+        result.textContent = opResult;
+    }
+
+    else if (opn == 'multi' && opn != undefined) {
+        opResult = (op1 * op2);
+        result.textContent = opResult;
+    }
+
+    else if (opn == 'divide' && opn != undefined) {
+        if (op2 == 0) {
+            result.textContent = 'ERROR';
+        } else {
+            opResult = (op1 / op2);
+            result.textContent = opResult;
+        }
+    }
+    else if (opn == 'sub' && opn != undefined) {
+        opResult = ((op1) - (op2));
+        result.textContent = opResult;
+    }
+    else {
+        clear = true;
+        return;
+    }
+
+    clear = true;
+    return;
+
 }
 
 const buttons = document.querySelectorAll('.buttons');
@@ -57,99 +92,219 @@ function resetBtnColor() {
 function divide() {
     resetBtnColor();
     buttonDivision.style.backgroundColor = 'gold';
-    result.textContent = displayValue;
+    calcDisplay.textContent = '/';
+    if (clear == true || calc == 'multi' || calc == 'sub' || calc == 'sum') {
+        calc = 'divide';
+        return
+    };
+
+    operate(storedDisplay, calc, result.textContent);
+    calc = 'divide';
 }
 
 function multiply() {
     resetBtnColor();
     buttonMulti.style.backgroundColor = 'gold';
-    result.textContent = displayValue;
+    calcDisplay.textContent = 'x';
+    if (clear == true || calc == 'divide' || calc == 'sub' || calc == 'sum') {
+        calc = 'multi';
+        return
+    };
+
+    operate(storedDisplay, calc, result.textContent);
+    calc = 'multi';
 }
 
 function sum() {
     resetBtnColor();
     buttonAdd.style.backgroundColor = 'gold';
-    result.textContent = displayValue;
+    calcDisplay.textContent = '+';
+
+    if (clear == true || calc == 'sub' || calc == 'multi' || calc == 'divide') {
+        calc = 'sum';
+        return
+    };
+
+    operate(storedDisplay, calc, result.textContent);
+    calc = 'sum';
 }
 
 function sub() {
     resetBtnColor();
     buttonSub.style.backgroundColor = 'gold';
-    result.textContent = displayValue;
+    calcDisplay.textContent = '-';
+    if (clear == true || calc == 'sum' || calc == 'multi' || calc == 'divide') {
+        calc = 'sub';
+        return
+    };
+
+    operate(storedDisplay, calc, result.textContent);
+    calc = 'sub';
 }
 
 function equal() {
     resetBtnColor();
+    if (clear == true) { return };
+
+    operate(storedDisplay, calc, result.textContent);
+    calcDisplay.textContent = '';
+    calc = undefined;
 }
 
 function period() {
-    displayValue = displayValue+'.';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^.$/)) {
+        result.textContent = '0';
+    } else if (result.textContent.match(/[.]/g)) {
+        return
+    } else {
+        result.textContent = result.textContent + '.';
+    }
 }
 
 function exclude() {
-    if (displayValue.match(/^.$/)) {
+    if (result.textContent == 'ERROR') { return }
+
+    if (result.textContent.match(/^.$/)) {
         resetBtnColor();
-        displayValue = '0';
+        result.textContent = '0';
     } else {
-        displayValue = displayValue.slice(0, -1);   
+        result.textContent = result.textContent.slice(0, -1);
     }
-    result.textContent = displayValue;
 }
 
 function clearDisplay() {
     resetBtnColor();
+    calcDisplay.textContent = '';
+    storedDisplay = '0';
     result.textContent = 0;
+    calc = undefined;
+}
+
+function clearDisplayBtn() {
+    resetBtnColor();
+    storedDisplay = result.textContent;
+    result.textContent = 0;
+    clear = false;
 }
 
 function digit0() {
-    displayValue = displayValue+'0';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '0';
+    } else {
+        result.textContent = result.textContent + '0';
+    }
 }
 
 function digit1() {
-    displayValue = displayValue+'1';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '1';
+    } else {
+        result.textContent = result.textContent + '1';
+    }
 }
 
 function digit2() {
-    displayValue = displayValue+'2';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '2';
+    } else {
+        result.textContent = result.textContent + '2';
+    }
 }
 
 function digit3() {
-    displayValue = displayValue+'3';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '3';
+    } else {
+        result.textContent = result.textContent + '3';
+    }
 }
 
 function digit4() {
-    displayValue = displayValue+'4';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '4';
+    } else {
+        result.textContent = result.textContent + '4';
+    }
 }
 
 function digit5() {
-    displayValue = displayValue+'5';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '5';
+    } else {
+        result.textContent = result.textContent + '5';
+    }
 }
 
 function digit6() {
-    displayValue = displayValue+'6';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '6';
+    } else {
+        result.textContent = result.textContent + '6';
+    }
 }
 
 function digit7() {
-    displayValue = displayValue+'7';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '7';
+    } else {
+        result.textContent = result.textContent + '7';
+    }
 }
 
 function digit8() {
-    displayValue = displayValue+'8';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '8';
+    } else {
+        result.textContent = result.textContent + '8';
+    }
 }
 
 function digit9() {
-    displayValue = displayValue+'1';
-    result.textContent = displayValue;
+    if (result.textContent.match(/^............$/)) { return };
+
+    if (clear == true) { clearDisplayBtn() };
+
+    if (result.textContent.match(/^0$/)) {
+        result.textContent = '9';
+    } else {
+        result.textContent = result.textContent + '9';
+    }
 }
 
 buttons.forEach(btn => {
@@ -165,25 +320,24 @@ buttons.forEach(btn => {
 })
 
 document.addEventListener('keydown', (event) => {
-    // let name = event.key;
-    // let code = event.code;
-    // console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
-    if (event.code == "KeyC") {console.log("Pressed Clear"); clearDisplay();}
-    else if (event.code == "NumpadDivide" || event.code == "IntlRo") {console.log("Pressed Divide key"); divide();}
-    else if (event.code == "NumpadMultiply") {console.log("Pressed Multiply key"); multiply();}
-    else if (event.code == "NumpadSubtract" || event.code == "Minus") {console.log("Pressed Subtract key"); sub();}
-    else if (event.code == "NumpadAdd") {console.log("Pressed Add key"); sum();}
-    else if (event.code == "Numpad7" || event.code == "Digit7") {console.log("Pressed 7 key"); digit7();}
-    else if (event.code == "Numpad8" || event.code == "Digit8") {console.log("Pressed 8 key"); digit8();}
-    else if (event.code == "Numpad9" || event.code == "Digit9") {console.log("Pressed 9 key"); digit9();}
-    else if (event.code == "Numpad4" || event.code == "Digit4") {console.log("Pressed 4 key"); digit4();}
-    else if (event.code == "Numpad5" || event.code == "Digit5") {console.log("Pressed 5 key"); digit5();}
-    else if (event.code == "Numpad6" || event.code == "Digit6") {console.log("Pressed 6 key"); digit6();}
-    else if (event.code == "Numpad1" || event.code == "Digit1") {console.log("Pressed 1 key"); digit1();}
-    else if (event.code == "Numpad2" || event.code == "Digit2") {console.log("Pressed 2 key"); digit2();}
-    else if (event.code == "Numpad3" || event.code == "Digit3") {console.log("Pressed 3 key"); digit3();}
-    else if (event.code == "Numpad0" || event.code == "Digit0") {console.log("Pressed 0 key"); digit0();}
-    else if (event.code == "NumpadDecimal" || event.code == "Period" || event.code == "Comma") {console.log("Pressed Dot key"); period();}
-    else if (event.code == "NumpadEnter" || event.code == "Equal") {console.log("Pressed Enter key"); equal();}
+    if (result.textContent.match(/^............$/)) { return };
 
-  }, false);
+    if (event.code == "NumpadEnter" || event.code == "Equal") { equal(); }
+    else if (event.code == "KeyC") { clearDisplay(); }
+    else if (event.code == "NumpadDivide" || event.code == "IntlRo") { divide(); }
+    else if (event.code == "NumpadMultiply") { multiply(); }
+    else if (event.code == "NumpadSubtract" || event.code == "Minus") { sub(); }
+    else if (event.code == "NumpadAdd") { console.log("Pressed Add key"); sum(); }
+    else if (event.code == "Numpad7" || event.code == "Digit7") { digit7(); }
+    else if (event.code == "Numpad8" || event.code == "Digit8") { digit8(); }
+    else if (event.code == "Numpad9" || event.code == "Digit9") { digit9(); }
+    else if (event.code == "Numpad4" || event.code == "Digit4") { digit4(); }
+    else if (event.code == "Numpad5" || event.code == "Digit5") { digit5(); }
+    else if (event.code == "Numpad6" || event.code == "Digit6") { digit6(); }
+    else if (event.code == "Numpad1" || event.code == "Digit1") { digit1(); }
+    else if (event.code == "Numpad2" || event.code == "Digit2") { digit2(); }
+    else if (event.code == "Numpad3" || event.code == "Digit3") { digit3(); }
+    else if (event.code == "Numpad0" || event.code == "Digit0") { digit0(); }
+    else if (event.code == "NumpadDecimal" || event.code == "Period" || event.code == "Comma") { period(); }
+    else if (event.code == "Backspace" || event.code == "Delete") { exclude(); }
+}, false);

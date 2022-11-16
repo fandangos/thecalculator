@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>The Calculator</title>
+    <meta name="viewport" content="width=device-width">
     <script src="javascript.js" defer></script>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,11 +12,14 @@
 <body>
     <div class="main" id="main">
         <div class="header" id="header">
-            <div class=headerText id="headerText">The Calculator</div>
+            <div class=headerText id="headerText">The Calculator
+                <p style='font-size: 20px; text-align: center;'>Works with keyboard</p>
+            </div>
         </div>
         <div class="content" id="content">
             <div class="calculator" id="calculator">
                 <div class="display" id="display">
+                    <div class="operation" id="operation"></div>
                     <div class="result" id="result">0</div>
                 </div>
                 <div class="row" id="row1">
